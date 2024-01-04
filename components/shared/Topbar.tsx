@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-const Topbar = () => {
+function Topbar() {
 	return (
 		<nav className='topbar'>
 			<Link href='/' className='flex items-center gap-4'>
@@ -37,6 +37,6 @@ const Topbar = () => {
 			</div>
 		</nav>
 	);
-};
+}
 
 export default Topbar;
