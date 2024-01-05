@@ -18,6 +18,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 // import { updateUser } from '@/lib/actions/user.actions';
 import { ThreadValidation } from '@/lib/validations/thread';
 import { usePathname, useRouter } from 'next/navigation';
+import { createThread } from '@/lib/actions/thread.actions';
 
 function PostThread({ userId }: { userId: string }) {
 	// init router
@@ -36,7 +37,15 @@ function PostThread({ userId }: { userId: string }) {
 
 	// submit handler
 	const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
-		console.log(values);
+		// console.log(values);
+		await createThread({
+			text: values.thread,
+			author: userId,
+			communityId: null,
+			path: pathname,
+		});
+
+		router.push('/');
 	};
 
 	return (
