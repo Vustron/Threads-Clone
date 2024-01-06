@@ -13,7 +13,6 @@ const Page = async ({ params }: { params: { id: string } }) => {
 	if (!user) return null;
 
 	const userInfo = await fetchUser(user.id);
-	const userData = JSON.parse(JSON.stringify(userInfo));
 	if (!userInfo?.onboarded) redirect('/onboarding');
 
 	const thread = await fetchThreadById(params.id);
@@ -24,7 +23,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
 				<ThreadCard
 					key={thread._id}
 					id={thread._id}
-					currentUserId={user.id || ''}
+					currentUserId={user.id}
 					parentId={thread.parentId}
 					content={thread.text}
 					author={thread.author}
@@ -38,7 +37,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
 				<Comment
 					threadId={thread.id}
 					currentUserImg={user.imageUrl}
-					currentUserId={userData._id}
+					currentUserId={JSON.stringify(userInfo._id)}
 				/>
 			</div>
 		</section>
