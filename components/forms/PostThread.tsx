@@ -20,7 +20,11 @@ import { ThreadValidation } from '@/lib/validations/thread';
 import { usePathname, useRouter } from 'next/navigation';
 import { createThread } from '@/lib/actions/thread.actions';
 
-function PostThread({ userId }: { userId: string }) {
+interface Props {
+	userId: string;
+}
+
+function PostThread({ userId }: Props) {
 	// init router
 	const router = useRouter();
 	// init pathname
