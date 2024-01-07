@@ -1,4 +1,4 @@
-import { fetchUser } from '@/lib/actions/user.actions';
+import { fetchUser, fetchUsers } from '@/lib/actions/user.actions';
 import { currentUser } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 
@@ -11,6 +11,14 @@ const Page = async () => {
 	const userData = JSON.parse(JSON.stringify(userInfo));
 
 	if (!userInfo?.onboarded) redirect('/onboarding');
+
+	// fetch users
+	const result = await fetchUsers({
+		userId: user.id,
+		searchString: '',
+		pageNumber: 1,
+		pageSize: 20,
+	});
 
 	return (
 		<section>
