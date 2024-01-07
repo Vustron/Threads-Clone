@@ -1,4 +1,5 @@
 import ProfileHeader from '@/components/shared/ProfileHeader';
+import ThreadsTab from '@/components/shared/ThreadsTab';
 import { Tabs, TabsList, TabsContent, TabsTrigger } from '@/components/ui/tabs';
 import { profileTabs } from '@/constants';
 import { fetchUser } from '@/lib/actions/user.actions';
