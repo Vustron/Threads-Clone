@@ -34,12 +34,18 @@ const Page = async () => {
 										height={20}
 										className='rounded-full object-cover'
 									/>
+									<p className='!text-small-regular text-light-1'>
+										<span className='mr-1 text-primary-500'>
+											{activity.author.name}
+										</span>{' '}
+										replied to your thread
+									</p>
 								</article>
 							</Link>
 						))}
 					</>
 				) : (
-					<p>No activity yet</p>
+					<p className='!text-base-regular text-light-3'>No activity yet</p>
 				)}
 			</section>
 		</section>
