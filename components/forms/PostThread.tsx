@@ -1,6 +1,11 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import * as z from 'zod';
+import { useForm } from 'react-hook-form';
+import { useOrganization } from '@clerk/nextjs';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { usePathname, useRouter } from 'next/navigation';
+
 import {
 	Form,
 	FormControl,
@@ -9,29 +14,22 @@ import {
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form';
-import * as z from 'zod';
-import { useForm } from 'react-hook-form';
-import { Textarea } from '../ui/textarea';
-import { zodResolver } from '@hookform/resolvers/zod';
-// import { updateUser } from '@/lib/actions/user.actions';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+
 import { ThreadValidation } from '@/lib/validations/thread';
-import { usePathname, useRouter } from 'next/navigation';
 import { createThread } from '@/lib/actions/thread.actions';
-import { useOrganization } from '@clerk/nextjs';
 
 interface Props {
 	userId: string;
 }
 
 function PostThread({ userId }: Props) {
-	// init router
 	const router = useRouter();
-	// init pathname
 	const pathname = usePathname();
-	// init org
+
 	const { organization } = useOrganization();
 
-	// init data
 	const form = useForm<z.infer<typeof ThreadValidation>>({
 		resolver: zodResolver(ThreadValidation),
 		defaultValues: {
@@ -40,10 +38,7 @@ function PostThread({ userId }: Props) {
 		},
 	});
 
-	// submit handler
 	const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
-		// console.log(values);
-
 		await createThread({
 			text: values.thread,
 			author: userId,
