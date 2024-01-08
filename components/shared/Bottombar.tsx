@@ -1,15 +1,12 @@
 'use client';
 
-import { sidebarLinks } from '@/constants';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
-import { usePathname, useRouter } from 'next/navigation';
-import { SignOutButton, SignedIn } from '@clerk/nextjs';
+import { usePathname } from 'next/navigation';
+
+import { sidebarLinks } from '@/constants';
 
 function Bottombar() {
-	// init router
-	const router = useRouter();
 	const pathname = usePathname();
 
 	return (
@@ -29,11 +26,13 @@ function Bottombar() {
 							<Image
 								src={link.imgURL}
 								alt={link.label}
-								width={24}
-								height={24}
+								width={16}
+								height={16}
+								className='object-contain'
 							/>
+
 							<p className='text-subtle-medium text-light-1 max-sm:hidden'>
-								{link.label.split(/\s+./)[0]}
+								{link.label.split(/\s+/)[0]}
 							</p>
 						</Link>
 					);
