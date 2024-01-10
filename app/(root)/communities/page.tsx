@@ -1,11 +1,10 @@
 import { currentUser } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 
-import dynamic from 'next/dynamic';
-
 import { fetchUser } from '@/lib/actions/user.actions';
 import { fetchCommunities } from '@/lib/actions/community.actions';
 
+import dynamic from 'next/dynamic';
 import { Loading } from '@/components/shared/Loading';
 import React from 'react';
 

@@ -29,7 +29,7 @@
 	}
 
 	.community-card_btn {
-		@apply rounded-lg bg-primary-500 px-5 py-1.5 text-small-regular !text-light-1 !important;
+		@apply hover:text-base-semibold hover:bg-purple-500 rounded-lg bg-primary-500 px-5 py-1.5 text-small-regular !text-light-1 !important;
 	}
 
 	/* thread card  */
@@ -47,7 +47,7 @@
 	}
 
 	.user-card_btn {
-		@apply hover:text-base-semibold hover:bg-purple-700 h-auto min-w-[74px] rounded-lg bg-primary-500 text-[12px] text-light-1 !important;
+		@apply hover:text-base-semibold hover:bg-purple-500 h-auto min-w-[74px] rounded-lg bg-primary-500 text-[12px] text-light-1 !important;
 	}
 
 	.searchbar {
