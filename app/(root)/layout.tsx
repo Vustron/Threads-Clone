@@ -2,11 +2,24 @@ import { ClerkProvider } from '@clerk/nextjs';
 import { Inter } from 'next/font/google';
 
 import '../globals.css';
-import Bottombar from '@/components/shared/Bottombar';
-import LeftSidebar from '@/components/shared/LeftSidebar';
-import Topbar from '@/components/shared/Topbar';
-import RightSidebar from '@/components/shared/RightSidebar';
+import dynamic from 'next/dynamic';
 import { dark } from '@clerk/themes';
+import React from 'react';
+import { Loading } from '@/components/shared/Loading';
+
+// lazy load
+const Bottombar = dynamic(() => import('@/components/shared/Bottombar'), {
+	loading: () => null,
+});
+const LeftSidebar = dynamic(() => import('@/components/shared/LeftSidebar'), {
+	loading: () => null,
+});
+const Topbar = dynamic(() => import('@/components/shared/Topbar'), {
+	loading: () => null,
+});
+const RightSidebar = dynamic(() => import('@/components/shared/RightSidebar'), {
+	loading: () => null,
+});
 
 export const metadata = {
 	title: 'Threads',
@@ -27,20 +40,22 @@ export default function RootLayout({
 			}}
 		>
 			<html lang='en'>
-				<body className={`${inter.className}`}>
-					<Topbar />
+				<body className={`${inter.className} custom-scrollbar`}>
+					<React.Suspense fallback={<Loading />}>
+						<Topbar />
 
-					<main className='flex flex-row'>
-						<LeftSidebar />
+						<main className='flex flex-row'>
+							<LeftSidebar />
 
-						<section className='main-container'>
-							<div className='w-full max-w-4xl'>{children}</div>
-						</section>
+							<section className='main-container'>
+								<div className='w-full max-w-4xl'>{children}</div>
+							</section>
 
-						<RightSidebar />
-					</main>
+							<RightSidebar />
+						</main>
 
-					<Bottombar />
+						<Bottombar />
+					</React.Suspense>
 				</body>
 			</html>
 		</ClerkProvider>

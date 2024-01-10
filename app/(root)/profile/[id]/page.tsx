@@ -1,11 +1,24 @@
-import ProfileHeader from '@/components/shared/ProfileHeader';
-import ThreadsTab from '@/components/shared/ThreadsTab';
+
 import { Tabs, TabsList, TabsContent, TabsTrigger } from '@/components/ui/tabs';
 import { profileTabs } from '@/constants';
 import { fetchUser } from '@/lib/actions/user.actions';
 import { currentUser } from '@clerk/nextjs';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
+import { Loading } from '@/components/shared/Loading';
+import React from 'react';
+import dynamic from 'next/dynamic';
+
+// lazy load
+const ProfileHeader = dynamic(
+	() => import('@/components/shared/ProfileHeader'),
+	{
+		loading: () => null,
+	}
+);
+const ThreadsTab = dynamic(() => import('@/components/shared/ThreadsTab'), {
+	loading: () => null,
+});
 
 const Page = async ({ params }: { params: { id: string } }) => {
 	// fetch current user
@@ -18,6 +31,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
 	if (!userInfo?.onboarded) redirect('/onboarding');
 
 	return (
+		<React.Suspense fallback={<Loading />}>
 		<section>
 			<ProfileHeader
 				accountId={userData.id}
@@ -66,6 +80,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
 				</Tabs>
 			</div>
 		</section>
+		</React.Suspense>
 	);
 };
 
