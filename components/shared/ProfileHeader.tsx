@@ -42,7 +42,7 @@ function ProfileHeader({
 				</div>
 				{accountId === authUserId && type !== 'Community' && (
 					<Link href='/profile/edit'>
-						<div className='flex cursor-pointer gap-3 rounded-lg bg-dark-3 px-4 py-2'>
+						<div className='hover:bg-purple-700 hover:text-base-semibold flex cursor-pointer gap-3 rounded-lg bg-dark-3 px-4 py-2'>
 							<Image
 								src='/assets/edit.svg'
 								alt='logout'

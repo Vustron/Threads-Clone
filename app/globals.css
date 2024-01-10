@@ -47,7 +47,7 @@
 	}
 
 	.user-card_btn {
-		@apply h-auto min-w-[74px] rounded-lg bg-primary-500 text-[12px] text-light-1 !important;
+		@apply hover:text-base-semibold hover:bg-purple-700 h-auto min-w-[74px] rounded-lg bg-primary-500 text-[12px] text-light-1 !important;
 	}
 
 	.searchbar {
@@ -131,7 +131,7 @@
 
 /* Tab */
 .tab {
-	@apply pl-0 pr-0 flex min-h-[50px] flex-1 items-center gap-1 bg-dark-2 text-light-2 data-[state=active]:bg-[#0e0e12] data-[state=active]:text-light-2 !important;
+	@apply hover:bg-dark-4 pl-0 pr-0 flex min-h-[50px] flex-1 items-center bg-dark-2 text-light-2 data-[state=active]:bg-[#0e0e12] data-[state=active]:text-light-2 !important;
 }
 
 .no-focus {
@@ -157,5 +157,5 @@
 }
 
 .comment-form_btn {
-	@apply rounded-3xl bg-primary-500 hover:bg-gray-500 px-8 py-2 !text-small-regular text-light-1 max-xs:w-full !important;
+	@apply rounded-3xl bg-primary-500 hover:bg-purple-700 hover:text-base-semibold px-8 py-2 !text-small-regular text-light-1 max-xs:w-full !important;
 }
