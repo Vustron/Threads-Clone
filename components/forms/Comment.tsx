@@ -19,6 +19,7 @@ import { Button } from '../ui/button';
 
 import { CommentValidation } from '@/lib/validations/thread';
 import { addCommentToThread } from '@/lib/actions/thread.actions';
+import { toast } from 'sonner';
 
 interface Props {
 	threadId: string;
@@ -37,14 +38,20 @@ function Comment({ threadId, currentUserImg, currentUserId }: Props) {
 	});
 
 	const onSubmit = async (values: z.infer<typeof CommentValidation>) => {
-		await addCommentToThread(
-			threadId,
-			values.thread,
-			JSON.parse(currentUserId),
-			pathname
-		);
+		try {
+			await addCommentToThread(
+				threadId,
+				values.thread,
+				JSON.parse(currentUserId),
+				pathname
+			);
 
-		form.reset();
+			form.reset();
+			toast.success('Commented successfully');
+		} catch (error: any) {
+			console.log(error);
+			toast.error(`Error on commenting: ${error.message}`);
+		}
 	};
 
 	return (

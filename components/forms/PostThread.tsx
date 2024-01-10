@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useOrganization } from '@clerk/nextjs';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { usePathname, useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 import {
 	Form,
@@ -39,14 +40,19 @@ function PostThread({ userId }: Props) {
 	});
 
 	const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
-		await createThread({
-			text: values.thread,
-			author: userId,
-			communityId: organization ? organization.id : null,
-			path: pathname,
-		});
-
-		router.push('/');
+		try {
+			await createThread({
+				text: values.thread,
+				author: userId,
+				communityId: organization ? organization.id : null,
+				path: pathname,
+			});
+			toast.success('Posted successfully');
+			router.push('/');
+		} catch (error: any) {
+			console.log(error);
+			toast.error(`Error on creating post: ${error.message}`);
+		}
 	};
 
 	return (

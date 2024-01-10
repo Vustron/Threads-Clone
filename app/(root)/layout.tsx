@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { dark } from '@clerk/themes';
 import React from 'react';
 import { Loading } from '@/components/shared/Loading';
+import { Toaster } from 'sonner';
 
 // lazy load
 const Bottombar = dynamic(() => import('@/components/shared/Bottombar'), {
@@ -48,6 +49,7 @@ export default function RootLayout({
 							<LeftSidebar />
 
 							<section className='main-container'>
+								<Toaster position='top-center' expand={true} richColors />
 								<div className='w-full max-w-4xl'>{children}</div>
 							</section>
 

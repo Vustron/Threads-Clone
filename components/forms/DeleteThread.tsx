@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 
 import { deleteThread } from '@/lib/actions/thread.actions';
+import { toast } from 'sonner';
 
 interface Props {
 	threadId: string;
@@ -33,9 +34,15 @@ function DeleteThread({
 			height={18}
 			className='cursor-pointer object-contain'
 			onClick={async () => {
-				await deleteThread(JSON.parse(threadId), pathname);
-				if (!parentId || !isComment) {
-					router.push('/');
+				try {
+					await deleteThread(JSON.parse(threadId), pathname);
+					if (!parentId || !isComment) {
+						router.push('/');
+					}
+					toast.success('Deleted successfully');
+				} catch (error: any) {
+					console.log(error);
+					toast.error(`Error on deleting thread: ${error.message}`);
 				}
 			}}
 		/>
